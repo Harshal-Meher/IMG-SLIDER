@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Slider</title>
+    <style>
+        .slider {
+            width: 500px; /* Set the width of the slider container */
+            overflow: hidden;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            width: 500px; /* Set the width of individual slides */
+            flex-shrink: 0;
+        }
+
+        /* Add more styles for navigation buttons if needed */
+
+        .prev,
+        .next {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <div class="slide-wrapper">
+            <div class="slide"><img src="image1.jpg" alt="Image 1"></div>
+            <div class="slide"><img src="image2.jpg" alt="Image 2"></div>
+            <div class="slide"><img src="image3.jpg" alt="Image 3"></div>
+            <!-- Add more slide elements with your images -->
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="prev">Previous</div>
+    <div class="next">Next</div>
+
+    <script>
+        const slideWrapper = document.querySelector(".slide-wrapper");
+        const slides = document.querySelectorAll(".slide");
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            } else if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+
+            const translateX = -slideIndex * 500; // Adjust the width of your slides
+
+            slideWrapper.style.transform = `translateX(${translateX}px)`;
+            currentSlide = slideIndex;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Event listeners for navigation buttons
+        document.querySelector(".next").addEventListener("click", nextSlide);
+        document.querySelector(".prev").addEventListener("click", prevSlide);
+
+        // Initialize the slider
+        showSlide(0);
+    </script>
+</body>
+</html>
